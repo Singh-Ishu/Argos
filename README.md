@@ -1,2 +1,2 @@
 # ARGOS
-## Analytical Resilience Engine for Global Outbound Surveillance
+## Analytical Resilience Engine for Global Output Surveillance
