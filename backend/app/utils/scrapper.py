@@ -4,6 +4,7 @@ import httpx
 from typing import Dict, Any 
 from backend.app.config import settings
 from fastapi import HTTPException
+from datetime import datetime, timedelta
 
 #Scrape information from APIs to the following categories:
 # Finances & Commodities (API Ninjas: Commodity Price API / US EIA API)
@@ -53,3 +54,68 @@ async def fetch_fin_EIA():
             return response.json()
     except Exception as e:
         return {"error": f"EIA API feed failed: {str(e)}", "data": {}}
+
+async def fetch_geopol_acled(limit: int = 5000, page: int = 1) -> Dict[str, Any]:
+    """
+    Fetches the past week's worth of actions/events from ACLED API.
+    Uses OAuth token authentication as described in the documentation.
+    """
+    if not settings.ACLED_EMAIL or not settings.ACLED_PASSWORD:
+        return {"error": "ACLED API feed failed: Credentials not configured", "data": []}
+
+    token_url = "https://acleddata.com/oauth/token"
+    token_headers = {"Content-Type": "application/x-www-form-urlencoded"}
+    token_data = {
+        "username": settings.ACLED_EMAIL,
+        "password": settings.ACLED_PASSWORD,
+        "grant_type": "password",
+        "client_id": "acled",
+        "scope": "authenticated"
+    }
+
+    try:
+        async with httpx.AsyncClient() as client:
+            # 1. Authenticate to get OAuth access token
+            token_response = await client.post(
+                token_url,
+                headers=token_headers,
+                data=token_data,
+                timeout=10.0
+            )
+            token_response.raise_for_status()
+            token_res_json = token_response.json()
+            access_token = token_res_json.get("access_token")
+            if not access_token:
+                return {"error": "ACLED API feed failed: Access token not found in response", "data": []}
+
+            # 2. Query ACLED data for the past week
+            end_date = datetime.now().date()
+            start_date = end_date - timedelta(days=7)
+            
+            start_str = start_date.strftime("%Y-%m-%d")
+            end_str = end_date.strftime("%Y-%m-%d")
+
+            api_url = "https://acleddata.com/api/acled/read?_format=json"
+            params = {
+                "event_date": f"{start_str}|{end_str}",
+                "event_date_where": "BETWEEN",
+                "limit": limit,
+                "page": page
+            }
+            
+            headers = {
+                "Authorization": f"Bearer {access_token}",
+                "Content-Type": "application/json"
+            }
+
+            data_response = await client.get(
+                api_url,
+                params=params,
+                headers=headers,
+                timeout=15.0
+            )
+            data_response.raise_for_status()
+            return data_response.json()
+
+    except Exception as e:
+        return {"error": f"ACLED API feed failed: {str(e)}", "data": []}
