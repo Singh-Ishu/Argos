@@ -54,9 +54,9 @@ async def analyze_geopolitical_risk(payload_manifest: Optional[Dict[str, Any]] =
     Generate a structured risk assessment based strictly on this data.
     """
 
-    try:
-        response = client.models.generate_content(
-            model="gemini-flash-latest",
+    def _sync_call():
+        return client.models.generate_content(
+            model="gemini-2.5-flash",
             contents=prompt,
             config=types.GenerateContentConfig(
                 system_instruction=SYSTEM_INSTRUCTION,
@@ -65,6 +65,9 @@ async def analyze_geopolitical_risk(payload_manifest: Optional[Dict[str, Any]] =
                 temperature=0.2, # Low temperature for consistent deterministic scoring
             )
         )
+
+    try:
+        response = await asyncio.to_thread(_sync_call)
         
         # Parse output directly into Pydantic model
         result = IngestionAnalysisResult.model_validate_json(response.text)
