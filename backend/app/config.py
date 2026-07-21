@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     EIA_API_KEY: str = ""
     ACLED_EMAIL: str = ""
     ACLED_PASSWORD: str = ""
+    GEMINI_API_KEY: str = ""
 
     model_config = SettingsConfigDict(
         env_file=BASE_DIR / ".env", 
