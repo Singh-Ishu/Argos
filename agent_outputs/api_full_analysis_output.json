@@ -28,7 +28,7 @@
       "Direct Indian refiners (IOCL, BPCL, HPCL) to maximize middle distillate output and rationalize non-essential exports.",
       "Implement diplomatic and maritime security coordination to restore corridor navigation."
     ],
-    "simulation_timestamp": "2026-07-22T16:53:35.425438+00:00"
+    "simulation_timestamp": "2026-07-22T16:55:22.229660+00:00"
   },
   "procurement": {
     "scenario_id": "SIM-API-TEST-001",
@@ -71,7 +71,7 @@
       "Unfilled shortfall: 0.0 mbpd deficit remains unfulfilled due to market supply limits.",
       "Freight price exposure: Elevated maritime risk premiums increase total landed cost per barrel."
     ],
-    "timestamp": "2026-07-22T16:53:36.042971+00:00"
+    "timestamp": "2026-07-22T16:55:23.356841+00:00"
   },
   "spr": {
     "scenario_id": "SIM-API-TEST-001",
@@ -164,6 +164,6 @@
       "Ministry of External Affairs: Engage international energy forums (IEA / OPEC+) to coordinate global inventory releases and stabilize crude benchmarks."
     ],
     "replenishment_strategy": "Schedule post-crisis reserve replenishment to begin on Day 11 (post-stabilization). Execute phased spot purchases when Dated Brent crude drops below $75/bbl and secure long-term bilateral supply contracts with non-disrupted producers.",
-    "timestamp": "2026-07-22T16:53:36.042715+00:00"
+    "timestamp": "2026-07-22T16:55:23.054931+00:00"
   }
 }
