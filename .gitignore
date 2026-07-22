@@ -39,3 +39,11 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+
+# Test outputs
+agent_outputs/
+
+# Web Prototype
+Web-Prototype.zip
+Web-Prototype/
+web-prototype/

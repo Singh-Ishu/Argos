@@ -190,9 +190,12 @@ async def fetch_maritime_data() -> Dict[str, Any]:
         }
 
     logger.info("Querying live VesselAPI for real-time maritime data (limits apply)...")
-    url = "https://api.vesselapi.com/v1/vessels"
+    url = "https://api.vesselapi.com/v1/search/vessels"
     headers = {"Authorization": f"Bearer {api_key}"}
-    params = {"limit": 1}
+    params = {
+        "filter.name": "Ever",
+        "pagination.limit": 1
+    }
     
     try:
         async with httpx.AsyncClient() as client:
