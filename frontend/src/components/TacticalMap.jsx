@@ -1,39 +1,36 @@
 import React, { useState } from 'react';
 
-// Refineries: [label, cx, cy, short]
+// Refineries: [label, cx, cy, short, textOffsetX, textOffsetY]
 const REFINERIES = [
-  ['Jamnagar', 66, 108, 'JAM'],
-  ['Mangalore', 80, 192, 'MNG'],
-  ['Paradip', 190, 98, 'PRD'],
-  ['Kochi', 88, 218, 'KCH'],
-  ['Haldia', 196, 80, 'HLD'],
+  { name: 'Jamnagar', cx: 1395, cy: 352, short: 'JAM', tx: 12, ty: 4 },
+  { name: 'Mangalore', cx: 1426, cy: 395, short: 'MNG', tx: -46, ty: 2 },
+  { name: 'Paradip', cx: 1472, cy: 370, short: 'PRD', tx: 12, ty: 5 },
+  { name: 'Kochi', cx: 1432, cy: 409, short: 'KCH', tx: 12, ty: 4 },
+  { name: 'Haldia', cx: 1485, cy: 357, short: 'HLD', tx: 12, ty: -6 },
 ];
 
 // Chokepoints
 const CHOKE = [
-  { id: 'hormuz', cx: 18, cy: 92, label: 'HORMUZ', color: '#EF4444' },
-  { id: 'bab', cx: 18, cy: 140, label: 'BAB EL-MANDEB', color: '#F59E0B' },
-  { id: 'malacca', cx: 260, cy: 166, label: 'MALACCA', color: '#10B981' },
+  { id: 'hormuz', cx: 1305, cy: 332, label: 'HORMUZ', color: '#EF4444' },
+  { id: 'bab', cx: 1238, cy: 368, label: 'BAB EL-MANDEB', color: '#F59E0B' },
+  { id: 'malacca', cx: 1566, cy: 486, label: 'MALACCA', color: '#10B981' },
 ];
 
 // Shipping lanes
 const LANES = [
-  { id: 'hormuz', label: 'Hormuz', points: [[8, 88], [40, 96], [60, 108], [66, 108]], color: '#EF4444', dash: '5,4', width: 1.5 },
-  { id: 'redsea', label: 'Red Sea / Bab-el-Mandeb', points: [[8, 148], [28, 136], [44, 120], [58, 106], [66, 108]], color: '#F59E0B', dash: '4,3', width: 1.5 },
-  { id: 'malacca', label: 'Malacca Strait', points: [[272, 168], [240, 158], [210, 148], [190, 138], [180, 128], [175, 108], [165, 98], [148, 94]], color: '#10B981', dash: '', width: 1.5 },
-  { id: 'cape', label: 'Cape Alt Route', points: [[8, 220], [20, 240], [30, 260], [50, 272], [80, 270], [100, 265], [120, 264], [140, 265]], color: '#06B6D4', dash: '6,4', width: 1 },
+  { id: 'hormuz', label: 'Hormuz', points: [[1305, 332], [1335, 340], [1365, 348], [1395, 352]], color: '#EF4444', dash: '8,6', width: 2.2 },
+  { id: 'redsea', label: 'Red Sea / Bab-el-Mandeb', points: [[1238, 368], [1280, 380], [1330, 390], [1380, 400], [1426, 395]], color: '#F59E0B', dash: '8,6', width: 2.2 },
+  { id: 'malacca', label: 'Malacca Strait', points: [[1610, 500], [1566, 486], [1525, 430], [1472, 370]], color: '#10B981', dash: '', width: 2.2 },
+  { id: 'cape', label: 'Cape Alt Route', points: [[1120, 720], [1200, 680], [1280, 610], [1360, 520], [1432, 409]], color: '#06B6D4', dash: '10,6', width: 1.6 },
 ];
 
 // Tankers
 const TANKERS = [
-  { cx: 30, cy: 100, color: '#EF4444', lane: 'hormuz' },
-  { cx: 22, cy: 145, color: '#F59E0B', lane: 'redsea' },
-  { cx: 255, cy: 162, color: '#10B981', lane: 'malacca' },
-  { cx: 50, cy: 260, color: '#06B6D4', lane: 'cape' },
+  { cx: 1350, cy: 344, color: '#EF4444', lane: 'hormuz' },
+  { cx: 1330, cy: 390, color: '#F59E0B', lane: 'redsea' },
+  { cx: 1545, cy: 458, color: '#10B981', lane: 'malacca' },
+  { cx: 1240, cy: 650, color: '#06B6D4', lane: 'cape' },
 ];
-
-// India map path definition
-const INDIA_PATH = "M 98,8 L 112,6 L 128,10 L 145,8 L 162,14 L 175,12 L 190,20 L 200,30 L 208,44 L 210,58 L 218,70 L 222,82 L 215,94 L 220,108 L 225,118 L 230,130 L 228,145 L 220,158 L 210,168 L 196,178 L 185,190 L 175,204 L 168,218 L 162,232 L 154,244 L 148,256 L 140,265 L 134,270 L 128,262 L 122,250 L 116,238 L 108,226 L 98,215 L 88,204 L 80,192 L 74,180 L 70,166 L 66,152 L 64,138 L 68,124 L 64,110 L 60,96 L 56,82 L 60,68 L 66,56 L 72,44 L 80,34 L 90,24 Z";
 
 export default function TacticalMap({ selectedCorridor = 'Strait of Hormuz', severity = 45 }) {
   const [activeToggle, setActiveToggle] = useState('All');
@@ -53,7 +50,6 @@ export default function TacticalMap({ selectedCorridor = 'Strait of Hormuz', sev
     emerald: '#10B981'
   };
 
-  // Helper to check if a specific corridor is active in the simulator
   const isCorridorActive = (laneId) => {
     if (laneId === 'hormuz' && selectedCorridor === 'Strait of Hormuz') return true;
     if (laneId === 'redsea' && selectedCorridor === 'Red Sea / Bab-el-Mandeb') return true;
@@ -86,9 +82,10 @@ export default function TacticalMap({ selectedCorridor = 'Strait of Hormuz', sev
 
       <div className="map-wrap" style={{ flex: 1, margin: '8px' }}>
         <div className="scan-line" />
-        <svg viewBox="0 0 280 290" width="100%" height="100%" style={{ display: 'block' }}>
-          {/* sea background */}
-          <rect width="280" height="290" fill="#080b11" />
+        {/* Render at high resolution vector coordinate space focused on Afro-Eurasia / Indian Ocean */}
+        <svg viewBox="1060 280 560 450" width="100%" height="100%" style={{ display: 'block' }}>
+          {/* Background Vector Map Image */}
+          <image href="/world.svg" x="0" y="0" width="2000" height="857" />
 
           {/* Render shipping lanes */}
           {showShipping && LANES.map(ln => {
@@ -119,9 +116,6 @@ export default function TacticalMap({ selectedCorridor = 'Strait of Hormuz', sev
             );
           })}
 
-          {/* India landmass */}
-          <path d={INDIA_PATH} fill="#0e1520" stroke="#1E2638" strokeWidth="1" />
-
           {/* Render chokepoints */}
           {showChoke && CHOKE.map(ch => {
             const isActive = isCorridorActive(ch.id);
@@ -129,11 +123,11 @@ export default function TacticalMap({ selectedCorridor = 'Strait of Hormuz', sev
             return (
               <g key={ch.id}>
                 {isActive && (
-                  <circle cx={ch.cx} cy={ch.cy} r="8" fill="none" stroke={chColor} strokeWidth="1.5" className={severity > 70 ? 'pulse-crimson' : 'pulse-amber'} />
+                  <circle cx={ch.cx} cy={ch.cy} r="14" fill="none" stroke={chColor} strokeWidth="1.8" className={severity > 70 ? 'pulse-crimson' : 'pulse-amber'} />
                 )}
-                <circle cx={ch.cx} cy={ch.cy} r="4" fill="none" stroke={chColor} strokeWidth="1" opacity=".8" />
-                <circle cx={ch.cx} cy={ch.cy} r="2" fill={chColor} opacity=".9" />
-                <text x={ch.cx + 8} y={ch.cy + 3} fill={chColor} fontSize="8" fontFamily="ui-monospace,monospace" fontWeight={isActive ? 'bold' : 'normal'} letterSpacing=".06em">
+                <circle cx={ch.cx} cy={ch.cy} r="6" fill="none" stroke={chColor} strokeWidth="1.2" opacity=".8" />
+                <circle cx={ch.cx} cy={ch.cy} r="3" fill={chColor} opacity=".9" />
+                <text x={ch.cx + 10} y={ch.cy + 4} fill={chColor} fontSize="13" fontFamily="ui-monospace,monospace" fontWeight={isActive ? 'bold' : 'normal'} letterSpacing=".04em">
                   {ch.label} {isActive ? `(${severity}%)` : ''}
                 </text>
               </g>
@@ -141,14 +135,14 @@ export default function TacticalMap({ selectedCorridor = 'Strait of Hormuz', sev
           })}
 
           {/* Render refineries */}
-          {showRefineries && REFINERIES.map(([name, cx, cy, short]) => (
-            <g key={name}>
+          {showRefineries && REFINERIES.map(ref => (
+            <g key={ref.name}>
               <polygon
-                points={`${cx},${cy - 7} ${cx - 5},${cy + 4} ${cx + 5},${cy + 4}`}
-                fill="#06B6D4" stroke="#06B6D4" strokeWidth=".5" opacity=".9"
+                points={`${ref.cx},${ref.cy - 9} ${ref.cx - 7},${ref.cy + 5} ${ref.cx + 7},${ref.cy + 5}`}
+                fill="#06B6D4" stroke="#06B6D4" strokeWidth="0.8" opacity=".9"
               />
-              <text x={cx + 7} y={cy + 2} fill="#06B6D4" fontSize="8" fontFamily="ui-monospace,monospace" fontWeight="600">
-                {short}
+              <text x={ref.cx + ref.tx} y={ref.cy + ref.ty} fill="#06B6D4" fontSize="13" fontFamily="ui-monospace,monospace" fontWeight="600">
+                {ref.short}
               </text>
             </g>
           ))}
@@ -160,29 +154,37 @@ export default function TacticalMap({ selectedCorridor = 'Strait of Hormuz', sev
             return (
               <polygon
                 key={i}
-                points={`${tk.cx},${tk.cy - 5} ${tk.cx - 4},${tk.cy + 3} ${tk.cx + 4},${tk.cy + 3}`}
+                points={`${tk.cx},${tk.cy - 7} ${tk.cx - 6},${tk.cy + 4} ${tk.cx + 6},${tk.cy + 4}`}
                 fill={tkColor}
                 opacity={isActive ? 1.0 : 0.75}
                 className={isActive ? 'blink' : ''}
               />
             );
           })}
-
-          {/* map legend */}
-          <g transform="translate(6,270)">
-            {[
-              [C.crimson, 'HORMUZ - BLOCKADE'],
-              [C.amber, 'RED SEA - RISK'],
-              [C.emerald, 'MALACCA - SECURE'],
-              [C.cyan, 'CAPE ALT ROUTE'],
-            ].map(([col, lbl], i) => (
-              <g key={i} transform={`translate(${i * 68},0)`}>
-                <line x1="0" y1="3" x2="10" y2="3" stroke={col} strokeWidth="1.5" />
-                <text x="13" y="6" fill={col} fontSize="7" fontFamily="ui-monospace,monospace">{lbl}</text>
-              </g>
-            ))}
-          </g>
         </svg>
+      </div>
+
+      {/* Map Legend: HTML outer container for perfect vector sharp layout */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-around',
+        padding: '8px 12px',
+        borderTop: `1px solid ${C.border}`,
+        background: 'rgba(10, 12, 16, 0.5)',
+        flexWrap: 'wrap',
+        gap: '8px'
+      }}>
+        {[
+          [C.crimson, 'HORMUZ - BLOCKADE'],
+          [C.amber, 'RED SEA - RISK'],
+          [C.emerald, 'MALACCA - SECURE'],
+          [C.cyan, 'CAPE ALT ROUTE'],
+        ].map(([col, lbl], i) => (
+          <div key={i} className="flex items-center gap-2" style={{ fontFamily: 'ui-monospace,monospace', fontSize: '9px' }}>
+            <span style={{ display: 'inline-block', width: '12px', height: '2px', background: col }} />
+            <span style={{ color: col, letterSpacing: '0.06em' }}>{lbl}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
