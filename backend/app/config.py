@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     GEMINI_API_KEY: str = ""
     SUPABASE_URL: str = ""
     SUPABASE_KEY: str = ""
+    VESSELAPI_API_KEY: str = ""
 
     model_config = SettingsConfigDict(
         env_file=BASE_DIR / ".env", 
