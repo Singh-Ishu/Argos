@@ -1,7 +1,7 @@
 import pytest
 import json
 from unittest.mock import MagicMock, patch
-from backend.app.utils.scrapper import fetch_fin_EIA
+from backend.app.utils.scrapers import fetch_fin_EIA
 from backend.app.config import settings
 
 @pytest.mark.anyio

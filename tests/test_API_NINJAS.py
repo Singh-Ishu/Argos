@@ -1,6 +1,6 @@
 # tests/test_finance.py
 import pytest
-from backend.app.utils.scrapper import fetch_fin_APINinjas
+from backend.app.utils.scrapers import fetch_fin_APINinjas
 
 @pytest.mark.anyio
 async def test_live_api_data_fetch():

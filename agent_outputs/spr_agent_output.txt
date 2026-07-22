@@ -9,7 +9,7 @@ Final Stock (mb)        : 13.5
 Average Daily Release   : 1.1 mbpd
 Floor Breached          : False
 Replenishment Start Day : Day 16
-Timestamp               : 2026-07-21T16:28:32.771662+00:00
+Timestamp               : 2026-07-22T16:26:18.564016+00:00
 
 --- Daily Drawdown Schedule ---
   Day 01: Release=1.10 mbpd, Stock=28.90 mb (73.2%), Runway=26.3 days
@@ -169,5 +169,5 @@ Raw JSON Output:
     "Ministry of External Affairs: Engage international energy forums (IEA / OPEC+) to coordinate global inventory releases and stabilize crude benchmarks."
   ],
   "replenishment_strategy": "Schedule post-crisis reserve replenishment to begin on Day 16 (post-stabilization). Execute phased spot purchases when Dated Brent crude drops below $75/bbl and secure long-term bilateral supply contracts with non-disrupted producers.",
-  "timestamp": "2026-07-21T16:28:32.771662+00:00"
+  "timestamp": "2026-07-22T16:26:18.564016+00:00"
 }

@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     ACLED_EMAIL: str = ""
     ACLED_PASSWORD: str = ""
     GEMINI_API_KEY: str = ""
+    SUPABASE_URL: str = ""
+    SUPABASE_KEY: str = ""
 
     model_config = SettingsConfigDict(
         env_file=BASE_DIR / ".env", 

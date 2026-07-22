@@ -5,7 +5,7 @@ from google.genai import types
 from typing import Dict, Any, Optional
 from backend.app.config import settings
 from backend.app.models.schema import IngestionAnalysisResult
-from backend.app.utils.scrapper import fetch_fin_APINinjas, fetch_fin_EIA
+from backend.app.utils.scrapers import fetch_phase1_raw_payloads
 
 # Initialize the Gemini Client
 client = genai.Client(api_key=settings.GEMINI_API_KEY)
@@ -27,18 +27,7 @@ async def analyze_geopolitical_risk(payload_manifest: Optional[Dict[str, Any]] =
     If payload_manifest is not provided, fetches live data from the commodity/finance scraper endpoints.
     """
     if payload_manifest is None:
-        ninja_data, eia_data = await asyncio.gather(
-            fetch_fin_APINinjas(),
-            fetch_fin_EIA()
-        )
-        payload_manifest = {
-            "finances": {
-                "api_ninjas": ninja_data,
-                "eia": eia_data
-            },
-            "geopolitical": {},
-            "shipping": {}
-        }
+        payload_manifest = await fetch_phase1_raw_payloads()
     prompt = f"""
     Analyze the following incoming raw data feeds:
 
