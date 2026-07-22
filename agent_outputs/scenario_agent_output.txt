@@ -6,7 +6,7 @@ Scenario ID             : SIM-HORMUZ-MOCK-001
 Corridor Name           : Strait of Hormuz
 Closure Percentage      : 60.0%
 Disruption Duration     : 30 days
-Timestamp               : 2026-07-22T16:26:17.334301+00:00
+Timestamp               : 2026-07-22T16:55:19.459416+00:00
 
 --- Quantitative Metrics ---
 Daily Deficit (mbpd)    : 1.32
@@ -65,5 +65,5 @@ Raw JSON Output:
     "Direct Indian refiners (IOCL, BPCL, HPCL) to maximize middle distillate output and rationalize non-essential exports.",
     "Implement diplomatic and maritime security coordination to restore corridor navigation."
   ],
-  "simulation_timestamp": "2026-07-22T16:26:17.334301+00:00"
+  "simulation_timestamp": "2026-07-22T16:55:19.459416+00:00"
 }

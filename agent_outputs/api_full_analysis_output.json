@@ -1,0 +1,169 @@
+{
+  "scenario": {
+    "scenario_id": "SIM-API-TEST-001",
+    "corridor_name": "Strait of Hormuz",
+    "closure_percentage": 50.0,
+    "duration_days": 10,
+    "metrics": {
+      "daily_deficit_mbpd": 1.1,
+      "total_volume_lost_mb": 11.0,
+      "refinery_capacity_impact_pct": 22.0,
+      "spr_depletion_days_used": 10.0,
+      "spr_remaining_days_cover": 4.8,
+      "estimated_brent_surge_pct": 8.75,
+      "estimated_domestic_fuel_price_surge_pct": 5.69,
+      "macro_gdp_drag_pct": 0.1
+    },
+    "executive_briefing": "A 50.0% closure of the Strait of Hormuz over 10 days creates a daily deficit of 1.1 mbpd. National Strategic Petroleum Reserves provide 4.8 days of remaining buffer against a 22.0% drop in refinery utilization.",
+    "cascading_impacts": [
+      "Crude supply deficit of 1.1 mbpd directly constraining national refinery throughput.",
+      "Anticipated global Brent crude price spike of 8.75%, widening current account deficit.",
+      "Domestic fuel retail prices projected to surge by 5.69%.",
+      "Macroeconomic GDP drag estimated at 0.1% due to elevated industrial energy costs.",
+      "Increased freight tariffs and supply chain delays across domestic logistics networks."
+    ],
+    "recommended_policy_directives": [
+      "Authorize immediate Strategic Petroleum Reserve (SPR) drawdown of up to 1.2 mbpd.",
+      "Contract alternative spot crude cargoes from West African and Latin American producers.",
+      "Direct Indian refiners (IOCL, BPCL, HPCL) to maximize middle distillate output and rationalize non-essential exports.",
+      "Implement diplomatic and maritime security coordination to restore corridor navigation."
+    ],
+    "simulation_timestamp": "2026-07-22T16:53:35.425438+00:00"
+  },
+  "procurement": {
+    "scenario_id": "SIM-API-TEST-001",
+    "refinery_name": "Jamnagar & IOCL Complex",
+    "optimization": {
+      "allocations": [
+        {
+          "crude_name": "Basrah Medium",
+          "origin_country": "Iraq",
+          "allocated_mbpd": 0.8609,
+          "total_landed_cost_usd_bbl": 79.7,
+          "lead_time_days": 12
+        },
+        {
+          "crude_name": "US WTI Midland",
+          "origin_country": "USA",
+          "allocated_mbpd": 0.2391,
+          "total_landed_cost_usd_bbl": 85.7,
+          "lead_time_days": 28
+        }
+      ],
+      "total_procured_mbpd": 1.1,
+      "unfilled_deficit_mbpd": 0.0,
+      "total_daily_cost_usd": 89104782.61,
+      "weighted_api_gravity": 31.39,
+      "weighted_sulfur_pct": 2.0,
+      "optimization_status": "OPTIMAL"
+    },
+    "executive_summary": "Optimal procurement plan for Jamnagar & IOCL Complex secures 1.1 mbpd out of 1.1 mbpd target deficit at a total daily cost of $89,104,782.61. Blended quality achieves an API gravity of 31.39 and sulfur content of 2.0%.",
+    "actionable_steps": [
+      "Issue immediate spot purchasing orders for allocated crude grades totaling 1.1 mbpd.",
+      "Establish Letters of Credit (LCs) via state banking syndicates for international crude vendors.",
+      "Fixture Very Large Crude Carrier (VLCC) tonnage for Atlantic basin routes (Brazil, West Africa) to mitigate freight spikes.",
+      "Implement crude oil futures hedging on MCX/ICE to fix crack spread margins.",
+      "Notify refinery blend managers to adjust desulfurization units based on blended sulfur content of 2.0%."
+    ],
+    "risk_tradeoffs": [
+      "Lead-time trade-off: Long-haul Atlantic crudes take up to 25-28 days transit versus 10-12 days for Persian Gulf routes.",
+      "Quality balance: Heavy/sweet grades blended to comply with refinery maximum sulfur limit of 2.0%.",
+      "Unfilled shortfall: 0.0 mbpd deficit remains unfulfilled due to market supply limits.",
+      "Freight price exposure: Elevated maritime risk premiums increase total landed cost per barrel."
+    ],
+    "timestamp": "2026-07-22T16:53:36.042971+00:00"
+  },
+  "spr": {
+    "scenario_id": "SIM-API-TEST-001",
+    "optimization": {
+      "daily_schedule": [
+        {
+          "day": 1,
+          "drawdown_volume_mbpd": 1.1,
+          "remaining_stock_mb": 33.9,
+          "stock_capacity_pct": 84.75,
+          "days_of_runway_left": 30.82
+        },
+        {
+          "day": 2,
+          "drawdown_volume_mbpd": 1.1,
+          "remaining_stock_mb": 32.8,
+          "stock_capacity_pct": 82.0,
+          "days_of_runway_left": 29.82
+        },
+        {
+          "day": 3,
+          "drawdown_volume_mbpd": 1.1,
+          "remaining_stock_mb": 31.7,
+          "stock_capacity_pct": 79.25,
+          "days_of_runway_left": 28.82
+        },
+        {
+          "day": 4,
+          "drawdown_volume_mbpd": 1.1,
+          "remaining_stock_mb": 30.6,
+          "stock_capacity_pct": 76.5,
+          "days_of_runway_left": 27.82
+        },
+        {
+          "day": 5,
+          "drawdown_volume_mbpd": 1.1,
+          "remaining_stock_mb": 29.5,
+          "stock_capacity_pct": 73.75,
+          "days_of_runway_left": 26.82
+        },
+        {
+          "day": 6,
+          "drawdown_volume_mbpd": 1.1,
+          "remaining_stock_mb": 28.4,
+          "stock_capacity_pct": 71.0,
+          "days_of_runway_left": 25.82
+        },
+        {
+          "day": 7,
+          "drawdown_volume_mbpd": 1.1,
+          "remaining_stock_mb": 27.3,
+          "stock_capacity_pct": 68.25,
+          "days_of_runway_left": 24.82
+        },
+        {
+          "day": 8,
+          "drawdown_volume_mbpd": 1.1,
+          "remaining_stock_mb": 26.2,
+          "stock_capacity_pct": 65.5,
+          "days_of_runway_left": 23.82
+        },
+        {
+          "day": 9,
+          "drawdown_volume_mbpd": 1.1,
+          "remaining_stock_mb": 25.1,
+          "stock_capacity_pct": 62.75,
+          "days_of_runway_left": 22.82
+        },
+        {
+          "day": 10,
+          "drawdown_volume_mbpd": 1.1,
+          "remaining_stock_mb": 24.0,
+          "stock_capacity_pct": 60.0,
+          "days_of_runway_left": 21.82
+        }
+      ],
+      "total_drawn_mb": 11.0,
+      "final_remaining_stock_mb": 24.0,
+      "average_daily_release_mbpd": 1.1,
+      "floor_breached": false,
+      "recommended_replenishment_start_day": 11,
+      "alert_level": "AMBER"
+    },
+    "policy_briefing": "Under scenario SIM-API-TEST-001, an estimated daily crude deficit of 1.10 mbpd over 10 days necessitates a cumulative SPR release of 11.00 million barrels. Ending SPR inventory stands at 24.00 mb (60.0% capacity) with national security alert level classified as AMBER.",
+    "inter_agency_actions": [
+      "MoPNG: Issue emergency executive decree authorizing ISPRL to initiate phased crude discharge from strategic caverns.",
+      "ISPRL: Activate main cavern discharge pumps at Visakhapatnam, Mangalore, and Padur to deliver crude to coastal refinery terminals.",
+      "Ministry of Defense: Secure mandatory strategic crude floor buffer to ensure uninterrupted operational fuel supply for defense forces.",
+      "Indian Refiners (IOCL, BPCL, HPCL): Re-calibrate refinery distillation units to handle SPR crude slates and prioritize high-demand diesel production.",
+      "Ministry of External Affairs: Engage international energy forums (IEA / OPEC+) to coordinate global inventory releases and stabilize crude benchmarks."
+    ],
+    "replenishment_strategy": "Schedule post-crisis reserve replenishment to begin on Day 11 (post-stabilization). Execute phased spot purchases when Dated Brent crude drops below $75/bbl and secure long-term bilateral supply contracts with non-disrupted producers.",
+    "timestamp": "2026-07-22T16:53:36.042715+00:00"
+  }
+}

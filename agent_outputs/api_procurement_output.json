@@ -1,0 +1,50 @@
+{
+  "scenario_id": "SIM-API-PROC-001",
+  "refinery_name": "IOCL Paradip Refinery",
+  "optimization": {
+    "allocations": [
+      {
+        "crude_name": "Basrah Medium",
+        "origin_country": "Iraq",
+        "allocated_mbpd": 0.3905,
+        "total_landed_cost_usd_bbl": 79.7,
+        "lead_time_days": 12
+      },
+      {
+        "crude_name": "Brazilian Tupi",
+        "origin_country": "Brazil",
+        "allocated_mbpd": 0.3095,
+        "total_landed_cost_usd_bbl": 85.8,
+        "lead_time_days": 25
+      },
+      {
+        "crude_name": "US WTI Midland",
+        "origin_country": "USA",
+        "allocated_mbpd": 0.5,
+        "total_landed_cost_usd_bbl": 85.7,
+        "lead_time_days": 28
+      }
+    ],
+    "total_procured_mbpd": 1.2,
+    "unfilled_deficit_mbpd": 0.0,
+    "total_daily_cost_usd": 100528095.24,
+    "weighted_api_gravity": 33.89,
+    "weighted_sulfur_pct": 1.0,
+    "optimization_status": "OPTIMAL"
+  },
+  "executive_summary": "Optimal procurement plan for IOCL Paradip Refinery secures 1.2 mbpd out of 1.2 mbpd target deficit at a total daily cost of $100,528,095.24. Blended quality achieves an API gravity of 33.89 and sulfur content of 1.0%.",
+  "actionable_steps": [
+    "Issue immediate spot purchasing orders for allocated crude grades totaling 1.2 mbpd.",
+    "Establish Letters of Credit (LCs) via state banking syndicates for international crude vendors.",
+    "Fixture Very Large Crude Carrier (VLCC) tonnage for Atlantic basin routes (Brazil, West Africa) to mitigate freight spikes.",
+    "Implement crude oil futures hedging on MCX/ICE to fix crack spread margins.",
+    "Notify refinery blend managers to adjust desulfurization units based on blended sulfur content of 1.0%."
+  ],
+  "risk_tradeoffs": [
+    "Lead-time trade-off: Long-haul Atlantic crudes take up to 25-28 days transit versus 10-12 days for Persian Gulf routes.",
+    "Quality balance: Heavy/sweet grades blended to comply with refinery maximum sulfur limit of 1.0%.",
+    "Unfilled shortfall: 0.0 mbpd deficit remains unfulfilled due to market supply limits.",
+    "Freight price exposure: Elevated maritime risk premiums increase total landed cost per barrel."
+  ],
+  "timestamp": "2026-07-22T16:53:44.338314+00:00"
+}
